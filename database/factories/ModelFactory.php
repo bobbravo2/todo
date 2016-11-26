@@ -11,14 +11,11 @@
 |
 */
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
-
-    return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
-    ];
+$factory->define(App\ToDo::class, function (Faker\Generator $faker) {
+	$task = $faker->firstName . ' in ' . $faker->city . ' with '. $faker->name . ' (the ' . $faker->jobTitle . ', dummy)';
+	return [
+		'task' => $task,
+		'due' => $faker->dateTimeBetween('+2 days', '+2 years'),
+		'completed' => $faker->boolean(20)
+	];
 });
